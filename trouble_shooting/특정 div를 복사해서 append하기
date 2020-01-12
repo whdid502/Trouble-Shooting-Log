@@ -1,0 +1,46 @@
+1. 목표
+<div id="box" class="box_main">
+<div>
+  <img src="..." width="100%">
+  <div class="main">
+    <a href="'+url+'" target="_blank">제목입니다</a>
+    <h5>2020-01-12T11:84:00Z | 글쓴이 </h5>
+  </div>
+  <p>내용입니다</p>
+</div>
+</div>
+ 이러한 html과 css로 이루어진 id가 box인 div를 선택하여 똑같은 css class의 적용을 받는 div를 append하고 싶었습니다.
+
+2. 시도한것
+ 1) var boxclone = $("#box>div");
+    $("#box").append(boxclone);
+    변수와 선택자로 box의 자식div를 선택해서 append 햇지만 실행하지 못했습니다.
+ 2) var boxclone = $("#box");
+    $("#box").append(boxclone);
+    css class의 적용도 받야아하기에 선택자를 제외해서 실행해보았지만 실행하지 못했습니다.
+
+3. 해결점
+<html>
+
+<body>
+<div id="box_post">
+<div id="box" class="box_main">
+<div>
+  <img src="..." width="100%">
+  <div class="main">
+    <a href="url">제목입니다</a>
+    <h5>시간 | 글쓴이 </h5>
+  </div>
+  <p>내용입니다</p>
+</div>
+</div>
+</div>
+</body>
+
+<script>
+  var newbox = $("#box").clone($(".newsbox"));
+  $("#box_post").append(newbox)
+</script>
+
+box 를 덮는 div를 만들고 id box_post를 매긴후 jquery의 clone을 사용해 변수로 지정해 append했습니다.
+굳이 box_post를 만든 이유는 append를 box에 바로 적용시켯더니 box안의 box안의 box.. 같은 구조가 되풀이 되었기 때문입니다.
